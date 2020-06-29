@@ -3,15 +3,32 @@ namespace IikoTransport;
 
 class Client 
 {
+  const BASE_IIKO_API_URL = 'https://api-ru.iiko.services/api/1/';
+  const BASE_URL_AUTH = 'https://api-ru.iiko.services/api/1/access_token';
+
   protected $token; 
   protected $apiKey; 
+  protected $httpClient; 
+
 
 
   public function __construct(string $apiKey) {
     $this->apiKey = $apiKey; 
+    $httpClientOptions = array(
+            'base_uri' => self::BASE_IIKO_API_URL,
+            'allow_redirects' => false,
+            'timeout' => 20,
+            'http_errors' => false,
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json'
+            ]
+        );
+        $this->httpClient = new \GuzzleHttp\Client($httpClientOptions);
   }
 
   public function request(IikoRequest $request) {
+    $token = $this->getToken(); 
 
   }
 
@@ -22,6 +39,19 @@ class Client
      */
     public function getToken()
     {
+      if (!$this->token) {
+        $response = $this->httpClient->request("POST", self::BASE_URL_AUTH,[
+          'json'=>[
+            'apiLogin'=>$this->apiKey
+          ] 
+        ]); 
+        if ($response->getStatusCode()!=200) {
+
+        }
+        //$result = json_decode($response);  
+        var_dump($response->getStatusCode()); 
+
+      }
         return $this->token;
     }
     

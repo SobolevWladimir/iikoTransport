@@ -8,10 +8,10 @@ class ClientTest extends TestCase
 {
   public function testRequest() {
   
-    $file=file_get_contents("./tests/apikey.txt");
-   $cliet = new Client("sdfsdfsdfs"); 
-var_dump($file); 
-   //$request  = new IikoRequest('GET', );  
+    $key=file_get_contents("./tests/apikey.txt");
+   $cliet = new Client(str_replace("\n", '', $key)); 
+   $request  = new IikoRequest('GET','localhost:80');  
+   $cliet->request($request);
    $this->assertTrue(true); 
 
   }
