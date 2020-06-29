@@ -4,8 +4,19 @@
     "authors": [
         {
             "name": "Wladimir",
-            "email": "Fast126@mail.ru"
+            "email": "Sobolev.Wladim@yandex.ru"
         }
     ],
-    "require": {}
+    "require": {
+        "guzzlehttp/guzzle": "^7.0"
+    }, 
+    "require-dev": {
+        "phpunit/phpunit": "^8.5.5",
+        "psr/log": "^1.1"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IikoTransport\\Tests\\": "tests/"
+        }
+    }
 }
