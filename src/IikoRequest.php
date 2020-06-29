@@ -1,5 +1,5 @@
 <?php
-namespace iikoTransport;
+namespace IikoTransport;
 
 
 

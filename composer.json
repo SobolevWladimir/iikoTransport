@@ -1,6 +1,8 @@
 {
     "name": "wladimir/iiko-transport",
     "description": "client library",
+    "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Wladimir",
@@ -8,11 +10,17 @@
         }
     ],
     "require": {
-        "guzzlehttp/guzzle": "^7.0"
+      "php": "^7.2.5",
+      "guzzlehttp/guzzle": "^7.0"
     }, 
     "require-dev": {
         "phpunit/phpunit": "^8.5.5",
         "psr/log": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "IikoTransport\\": "src/"
+        }
     },
     "autoload-dev": {
         "psr-4": {

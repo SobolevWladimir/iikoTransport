@@ -1,6 +1,6 @@
 <?php
 
-namespace iikoTransport;
+namespace IikoTransport;
 
 use iiko\Exceptions;
 
