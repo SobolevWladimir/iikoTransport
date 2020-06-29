@@ -1,0 +1,11 @@
+{
+    "name": "wladimir/iiko-transport",
+    "description": "client library",
+    "authors": [
+        {
+            "name": "Wladimir",
+            "email": "Fast126@mail.ru"
+        }
+    ],
+    "require": {}
+}
