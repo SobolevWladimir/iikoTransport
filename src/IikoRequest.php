@@ -5,7 +5,6 @@ namespace IikoTransport;
 
 class IikoRequest
 {
-    protected $method;
     protected $uri;
     /**
      * @var array
@@ -15,19 +14,25 @@ class IikoRequest
      * @var array
      */
     protected $headers = [];
+    /**
+     * @var string
+     */
     protected $url;
+  
+    /**
+     * @var array
+     */
+    protected $json=[]; 
 
     /**
      * IikoRequest constructor.
      * @param $method
      * @param $endPoint
      */
-    public function __construct($method, $uri, array $params = [], array $headers = [])
+    public function __construct(string $uri, array $json)
     {
-        $this->method = $method;
         $this->uri = $uri;
-        $this->params = $params;
-        $this->headers = $headers;
+        $this->json = $json; 
     }
 
     public function setUrl($url)
@@ -62,11 +67,11 @@ class IikoRequest
     public function getUri()
     {
         $url = $this->uri;
-        if ($this->method == strtoupper('GET')) {
-            if ($this->params) {
-                $url .= '?' . http_build_query($this->params);
-            }
-        }
+        // if ($this->method == strtoupper('GET')) {
+        //     if ($this->params) {
+        //         $url .= '?' . http_build_query($this->params);
+        //     }
+        // }
         return $url;
     }
 
@@ -78,27 +83,6 @@ class IikoRequest
         $this->uri = $uri;
     }
 
-    /**
-     * @return array
-     */
-    public function getParams()
-    {
-        if(isset($this->headers['Content-Type']) AND strtolower($this->headers['Content-Type']) == 'application/json') {
-            return json_encode($this->params, JSON_UNESCAPED_UNICODE);
-        }else {
-            return http_build_query($this->params);
-        }
-
-        return $this->params;
-    }
-
-    /**
-     * @param array $params
-     */
-    public function setParams($params)
-    {
-        $this->params = $params;
-    }
 
     /**
      * @return array
@@ -116,4 +100,24 @@ class IikoRequest
         $this->headers = $headers;
     }
 
+    
+    /**
+     * Get json.
+     *
+     * @return array.
+     */
+    public function getJson():array 
+    {
+        return $this->json;
+    }
+    
+    /**
+     * Set json.
+     *
+     * @param json the value to set.
+     */
+    public function setJson(array $json)
+    {
+        $this->json = $json;
+    }
 }

@@ -3,6 +3,7 @@ namespace IikoTransport;
 
 use IikoTransport\Exception\AuthException; 
 
+
 class Client 
 {
   const BASE_IIKO_API_URL = 'https://api-ru.iiko.services/api/1/';
@@ -29,9 +30,16 @@ class Client
         $this->httpClient = new \GuzzleHttp\Client($httpClientOptions);
   }
 
-  public function request(IikoRequest $request) {
+  public function request(IikoRequest $request):IikoResponse {
     $token = $this->getToken(); 
-
+    $response = $this->httpClient->request("POST",$request->getUri(), [
+      'headers'=>[
+        'Authorization'=>'Bearer '.$token, 
+      ],  
+      'json'=>$request->getJson()
+    ]
+    ); 
+    return  new IikoResponse($request, $response->getBody(),$response->getStatusCode(), $response->getHeaders()) ; 
   }
 
     /**
@@ -50,10 +58,8 @@ class Client
         if ($response->getStatusCode()!=200){
            throw new  AuthException($response->getBody()); 
         }; 
-
         $result = json_decode((string) $response->getBody(), true);  
         $this->setToken($result['token']); 
-
       }
         return $this->token;
     }

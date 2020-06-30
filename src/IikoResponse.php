@@ -2,8 +2,6 @@
 
 namespace IikoTransport;
 
-use iiko\Exceptions;
-
 class IikoResponse
 {
     protected $iikoRequest;
@@ -13,7 +11,7 @@ class IikoResponse
     protected $hasError = false;
 
 
-    public function __construct(IikoRequest $request, $body, $httpStatusCode, $headers)
+    public function __construct(IikoRequest $request,string  $body, int $httpStatusCode, $headers)
     {
         $this->iikoRequest = $request;
         $this->body = $body;
