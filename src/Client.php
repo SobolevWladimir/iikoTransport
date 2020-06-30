@@ -1,6 +1,8 @@
 <?php
 namespace IikoTransport; 
 
+use IikoTransport\Exception\AuthException; 
+
 class Client 
 {
   const BASE_IIKO_API_URL = 'https://api-ru.iiko.services/api/1/';
@@ -45,11 +47,12 @@ class Client
             'apiLogin'=>$this->apiKey
           ] 
         ]); 
-        if ($response->getStatusCode()!=200) {
+        if ($response->getStatusCode()!=200){
+           throw new  AuthException($response->getBody()); 
+        }; 
 
-        }
-        //$result = json_decode($response);  
-        var_dump($response->getStatusCode()); 
+        $result = json_decode((string) $response->getBody(), true);  
+        $this->setToken($result['token']); 
 
       }
         return $this->token;
