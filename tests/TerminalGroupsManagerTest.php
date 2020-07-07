@@ -23,14 +23,13 @@ class TerminalGroupsManagerTest extends TestCase
       $this->transport = new IikoTransport($key); 
     }
     return $this->transport; 
-
   }
 
-   public function testGetInfo() {
-     $organization =$this->getOrganizationIds();
-     $response = $this->getIikoTransport()->getTerminalGroupsManager()->getInfo($organization);
-     $this->assertTrue($response->getStatusCode()==200);
-   }
+  public function testGetInfo() {
+    $organization =$this->getOrganizationIds();
+    $response = $this->getIikoTransport()->getTerminalGroupsManager()->getInfo($organization);
+    $this->assertTrue($response->getStatusCode()==200);
+  }
 
   private function getOrganizationIds(){
     if (!$this->organizationIds){
@@ -44,9 +43,5 @@ class TerminalGroupsManagerTest extends TestCase
 
     return $this->organizationIds; 
   }
-
-
-
-  
   
 }
