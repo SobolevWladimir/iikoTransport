@@ -16,8 +16,8 @@ class ClientTest extends TestCase
       'includeDisabled'=>false, 
     ]);  
    $response = $cliet->request($request);
-    var_dump($response->getBody()); 
-   $this->assertTrue(true); 
+
+   $this->assertTrue($response->getStatusCode()==200); 
 
   }
 }

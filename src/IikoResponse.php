@@ -6,16 +6,16 @@ class IikoResponse
 {
     protected $iikoRequest;
     protected $body;
-    protected $httpStatusCode;
+    protected $statusCode;
     protected $headers;
     protected $hasError = false;
 
 
-    public function __construct(IikoRequest $request,string  $body, int $httpStatusCode, $headers)
+    public function __construct(IikoRequest $request,string  $body, int $statusCode, $headers)
     {
         $this->iikoRequest = $request;
         $this->body = $body;
-        $this->httpStatusCode = $httpStatusCode;
+        $this->statusCode = $statusCode;
         $this->headers = $headers;
 
         $this->checkError();
@@ -23,7 +23,7 @@ class IikoResponse
 
     protected function checkError()
     {
-        if ($this->httpStatusCode != 200) {
+        if ($this->statusCode != 200) {
             $this->hasError = true;
         }
     }
@@ -38,8 +38,14 @@ class IikoResponse
         return $this->body;
     }
 
-    public function getHttpStatusCode()
+    public function getStatusCode():int
     {
-        return $this->httpStatusCode;
+        return $this->statusCode;
+    }
+    /**
+     * return json parse to array 
+     */
+    public function toArray():array{
+      return json_decode($this->getBody(), true); 
     }
 }
