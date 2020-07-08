@@ -30,6 +30,12 @@ class TerminalGroupsManagerTest extends TestCase
     $response = $this->getIikoTransport()->getTerminalGroupsManager()->getInfo($organization);
     $this->assertTrue($response->getStatusCode()==200);
   }
+  public function testIsAlive(){
+    $organization =$this->getOrganizationIds();
+    $response = $this->getIikoTransport()->getTerminalGroupsManager()->getIsAlive($organization, []);
+    $this->assertTrue($response->getStatusCode()==200);
+  }
+
 
   private function getOrganizationIds(){
     if (!$this->organizationIds){

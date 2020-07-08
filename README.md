@@ -17,3 +17,15 @@ $transport = new IikoTransport('api key');
 $response = $transport->getOrganizationManager()->getList();
 echo ($response->toArray()); 
 ```
+
+## Terminal groups
+### Method that returns information on groups of delivery terminals.
+```
+$response = $transport->getTerminalGroupsManager()->getInfo($organization);
+echo ($response->toArray()); 
+```
+### Method that returns information on availability of group of terminals.
+```
+$response = $transport->getTerminalGroupsManager()->getIsAlive($organization);
+echo ($response->toArray()); 
+```
