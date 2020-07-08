@@ -13,6 +13,7 @@ $transport = new IikoTransport('api key');
 ## Organization 
 
 ### Returns organizations available to api-login user. 
+[link]('https://api-ru.iiko.services/#tag/Organizations')
 ```
 $response = $transport->getOrganizationManager()->getList();
 echo ($response->toArray()); 
