@@ -5,6 +5,7 @@ namespace IikoTransport;
 use IikoTransport\Client; 
 use IikoTransport\OrganizationManager; 
 use IikoTransport\TerminalGroupsManager; 
+use IikoTransport\AddressesManager; 
 
 class IikoTransport 
 {
@@ -23,6 +24,11 @@ class IikoTransport
    */
   private $terminalGroupsManager; 
 
+  /**
+   * @var AddressesManager; 
+   */
+  private  $addressesManager; 
+
   public function __construct(string $api_key) {
     $this->client= new Client($api_key); 
   }
@@ -38,6 +44,11 @@ class IikoTransport
       $this->terminalGroupsManager = new TerminalGroupsManager($this->client); 
     }
     return $this->terminalGroupsManager; 
-
+  }
+  public function getAddressesManager(){
+    if (!$this->addressesManager){
+      $this->addressesManager = new AddressesManager($this->client); 
+    }
+    return $this->addressesManager; 
   }
 }
